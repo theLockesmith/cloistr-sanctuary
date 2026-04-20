@@ -7,7 +7,7 @@
 - **Company:** Coldforge
 - **Type:** Static Web Application (SolidJS)
 - **URL:** `cloistr.xyz`
-- **Registry:** `registry.coldforge.xyz/coldforge/cloistr-sanctuary`
+- **Registry:** `registry.aegis-hq.xyz/coldforge/cloistr-sanctuary`
 - **Repo:** `git@git.coldforge.xyz:coldforge/cloistr-sanctuary.git`
 
 **Company Rules:** See [Coldforge CLAUDE.md](~/arbiter/coldforge/CLAUDE.md)
