@@ -11,8 +11,7 @@ test:
   image: node:${NODE_VERSION}-alpine
   before_script:
     - apk add --no-cache git
-    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@git.aegis-hq.xyz/".insteadOf "ssh://git@git.aegis-hq.xyz/"
-    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@git.aegis-hq.xyz/".insteadOf "git@git.aegis-hq.xyz:"
+    - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@git.aegis-hq.xyz/".insteadOf "https://git.aegis-hq.xyz/"
     - corepack enable && corepack prepare pnpm@latest --activate
     - pnpm install --frozen-lockfile || pnpm install
   script:
