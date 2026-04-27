@@ -1,13 +1,13 @@
-# Build stage
-FROM node:22-alpine AS builder
+# Build stage - use Harbor proxy cache to avoid Docker Hub rate limits
+FROM harbor.apps.weaponized-autism.empacchosting.com/dockerhub/library/node:22-alpine AS builder
 
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install git (needed for git dependencies) and pnpm
+RUN apk add --no-cache git && corepack enable && corepack prepare pnpm@latest --activate
 
 # Copy package files
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile || pnpm install
@@ -19,7 +19,7 @@ COPY . .
 RUN pnpm build
 
 # Production stage - serve with unprivileged container for OpenShift
-FROM nginxinc/nginx-unprivileged:alpine
+FROM harbor.apps.weaponized-autism.empacchosting.com/dockerhub/nginxinc/nginx-unprivileged:alpine
 
 # Copy built assets
 COPY --from=builder /app/dist /usr/share/nginx/html
