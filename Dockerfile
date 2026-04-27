@@ -1,5 +1,5 @@
-# Build stage - use oci.coldforge.xyz pullthrough proxy for Docker Hub
-FROM oci.coldforge.xyz/docker.io/library/node:22-alpine AS builder
+# Build stage
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -18,8 +18,8 @@ COPY . .
 # Build
 RUN pnpm build
 
-# Production stage - serve with unprivileged container for OpenShift
-FROM oci.coldforge.xyz/docker.io/nginxinc/nginx-unprivileged:alpine
+# Production stage
+FROM nginxinc/nginx-unprivileged:alpine
 
 # Copy built assets
 COPY --from=builder /app/dist /usr/share/nginx/html
