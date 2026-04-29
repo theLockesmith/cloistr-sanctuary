@@ -1,5 +1,6 @@
-import { AuthProvider, Header, Footer } from '@cloistr/ui'
-import type { Service } from '@cloistr/ui'
+import { SharedAuthProvider, Header, Footer, ToastProvider } from '@cloistr/ui/components'
+import type { Service } from '@cloistr/ui/components'
+import '@cloistr/ui/styles'
 
 const cloistrServices: Service[] = [
   { id: 'identity', name: 'Identity', icon: '🔑', url: 'https://me.cloistr.xyz' },
@@ -76,8 +77,9 @@ function App() {
   const logo = <img src="/cloistr-logo.svg" alt="Cloistr" style={{ height: 32 }} />
 
   return (
-    <AuthProvider>
-      <div className="sanctuary">
+    <ToastProvider>
+      <SharedAuthProvider>
+        <div className="sanctuary">
         <Header
           logo={logo}
           logoHref="/"
@@ -134,8 +136,9 @@ function App() {
         </main>
 
         <Footer />
-      </div>
-    </AuthProvider>
+        </div>
+      </SharedAuthProvider>
+    </ToastProvider>
   )
 }
 
