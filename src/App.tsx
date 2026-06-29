@@ -66,14 +66,11 @@ const landingServices: LandingService[] = [
 ]
 
 function App() {
-  const logo = <img src="/cloistr-logo.svg" alt="Cloistr" style={{ height: 32 }} />
-
   return (
     <ToastProvider>
       <SharedAuthProvider>
         <div className="sanctuary">
         <Header
-          logo={logo}
           logoHref="/"
           activeServiceId="home"
         />
