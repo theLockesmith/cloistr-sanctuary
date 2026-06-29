@@ -1,13 +1,5 @@
 import { SharedAuthProvider, Header, Footer, ToastProvider } from '@cloistr/ui/components'
-import type { Service } from '@cloistr/ui/components'
 import '@cloistr/ui/styles'
-
-const cloistrServices: Service[] = [
-  { id: 'identity', name: 'Identity', icon: '🔑', url: 'https://me.cloistr.xyz' },
-  { id: 'space', name: 'Space', icon: '💬', url: 'https://space.cloistr.xyz' },
-  { id: 'stash', name: 'Stash', icon: '📁', url: 'https://stash.cloistr.xyz' },
-  { id: 'discovery', name: 'Discovery', icon: '🔍', url: 'https://discover.cloistr.xyz' },
-]
 
 interface LandingService {
   name: string
@@ -83,8 +75,7 @@ function App() {
         <Header
           logo={logo}
           logoHref="/"
-          services={cloistrServices}
-          signerUrl="https://signer.cloistr.xyz"
+          activeServiceId="home"
         />
 
         <main className="main">
