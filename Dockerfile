@@ -4,7 +4,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Install git (needed for git dependencies) and pnpm
-RUN apk add --no-cache git && corepack enable && corepack prepare pnpm@latest --activate
+RUN apk add --no-cache git && corepack enable && corepack prepare pnpm@10.29.3 --activate
 
 # Copy package files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
