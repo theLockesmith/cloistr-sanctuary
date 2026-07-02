@@ -4,6 +4,12 @@ default:
 
 stages:
   - build
+  - smoke
+
+include:
+  - project: 'coldforge/ci-templates'
+    ref: main
+    file: '/templates/frontend-smoke.yml'
 
 build:
   stage: build
@@ -14,7 +20,7 @@ build:
     - local
   script:
     - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf '%s:%s' \"${CI_REGISTRY_USER}\" \"${CI_REGISTRY_PASSWORD}\" | base64 | tr -d '\\n')\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
@@ -24,3 +30,8 @@ build:
   only:
     - main
     - master
+
+# Smoke-test: load built image in real Chromium, fail on console errors / blank page
+smoke-test:
+  extends: .smoke-test
+  needs: ["build"]
