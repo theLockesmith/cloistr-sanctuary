@@ -8,7 +8,7 @@
 - **Type:** Static Web Application (SolidJS)
 - **URL:** `cloistr.xyz`
 - **Registry:** `registry.aegis-hq.xyz/coldforge/cloistr-sanctuary`
-- **Repo:** `git@git.coldforge.xyz:coldforge/cloistr-sanctuary.git`
+- **Repo:** `git@git.aegis-hq.xyz:coldforge/cloistr-sanctuary.git`
 
 **Company Rules:** See [Coldforge CLAUDE.md](~/arbiter/coldforge/CLAUDE.md)
 **Cloistr Rules:** See [Cloistr CLAUDE.md](~/arbiter/cloistr/CLAUDE.md)

@@ -1,4 +1,4 @@
-import { SharedAuthProvider, Header, Footer, ToastProvider } from '@cloistr/ui/components'
+import { SharedAuthProvider, Header, Footer, ToastProvider, ThemeProvider } from '@cloistr/ui/components'
 import '@cloistr/ui/styles'
 
 interface LandingService {
@@ -67,6 +67,7 @@ const landingServices: LandingService[] = [
 
 function App() {
   return (
+    <ThemeProvider>
     <ToastProvider>
       <SharedAuthProvider>
         <div className="sanctuary">
@@ -127,6 +128,7 @@ function App() {
         </div>
       </SharedAuthProvider>
     </ToastProvider>
+    </ThemeProvider>
   )
 }
 
