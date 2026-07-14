@@ -9,27 +9,18 @@ stages:
 include:
   - project: 'coldforge/ci-templates'
     ref: main
+    file: '/templates/kaniko-build.yml'
+  - project: 'coldforge/ci-templates'
+    ref: main
     file: '/templates/frontend-smoke.yml'
 
+# Build via the shared template. It carries the branch rules (default branch +
+# merge_request + renovate/*) and pushes :latest only on the default branch, so
+# Renovate MRs get a green build+smoke pipeline and can auto-merge. Do NOT add
+# an only:/rules: here that narrows it back to the default branch.
 build:
+  extends: .kaniko-build
   stage: build
-  image:
-    name: gcr.io/kaniko-project/executor:v1.23.2-debug
-    entrypoint: [""]
-  tags:
-    - local
-  script:
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"username\":\"${CI_REGISTRY_USER}\",\"password\":\"${CI_REGISTRY_PASSWORD}\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
-      --destination "${CI_REGISTRY_IMAGE}:latest"
-      --registry-mirror=oci.coldforge.xyz
-  only:
-    - main
-    - master
 
 # Smoke-test: load built image in real Chromium, fail on console errors / blank page
 smoke-test:
