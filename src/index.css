@@ -173,7 +173,183 @@ a:hover {
   color: var(--cloistr-text-muted);
 }
 
-/* Responsive */
+/* ──────────────────────────────────────────────────────────────────────────
+   Loading state
+   ────────────────────────────────────────────────────────────────────────── */
+
+.sanctuary--loading {
+  align-items: center;
+  justify-content: center;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Dashboard — signed-in view
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Welcome bar */
+.dashboard-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0 1.5rem;
+  border-bottom: 1px solid var(--cloistr-border);
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.dashboard-heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.dashboard-pubkey {
+  margin: 0;
+  color: var(--cloistr-text-muted);
+  font-size: 0.9rem;
+}
+
+.dashboard-pubkey code {
+  font-family: var(--cloistr-font-mono, monospace);
+  background: var(--cloistr-bg-elevated);
+  border: 1px solid var(--cloistr-border);
+  border-radius: var(--cloistr-radius-sm, 4px);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.85rem;
+}
+
+.dashboard-profile-link {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--cloistr-border);
+  border-radius: var(--cloistr-radius-lg);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  color: var(--cloistr-text);
+}
+
+.dashboard-profile-link:hover {
+  border-color: var(--cloistr-primary);
+  color: var(--cloistr-primary-light);
+}
+
+/* Featured app (Space) */
+.dashboard-featured {
+  margin-bottom: 2.5rem;
+}
+
+.featured-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(124, 58, 237, 0.04));
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: var(--cloistr-radius-lg);
+  padding: 1.5rem 2rem;
+  transition: all 0.2s;
+  color: var(--cloistr-text);
+}
+
+.featured-card:hover {
+  border-color: var(--cloistr-primary);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+  color: var(--cloistr-text);
+}
+
+.featured-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.featured-content {
+  flex: 1;
+}
+
+.featured-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.featured-description {
+  margin: 0;
+  color: var(--cloistr-text-muted);
+  font-size: 0.95rem;
+}
+
+.featured-arrow {
+  font-size: 1.4rem;
+  color: var(--cloistr-primary-light);
+  flex-shrink: 0;
+}
+
+/* Workspace app grid */
+.dashboard-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cloistr-text-muted);
+  margin: 0 0 1rem;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.app-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--cloistr-bg-elevated);
+  border: 1px solid var(--cloistr-border);
+  border-radius: var(--cloistr-radius-lg);
+  padding: 0.875rem 1rem;
+  transition: all 0.15s;
+  color: var(--cloistr-text);
+}
+
+.app-card:hover {
+  border-color: var(--cloistr-primary);
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.15);
+  transform: translateY(-2px);
+  color: var(--cloistr-text);
+}
+
+.app-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.app-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.app-description {
+  font-size: 0.8rem;
+  color: var(--cloistr-text-muted);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Responsive
+   ────────────────────────────────────────────────────────────────────────── */
+
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
@@ -193,5 +369,24 @@ a:hover {
 
   .cta-title {
     font-size: 1.5rem;
+  }
+
+  .dashboard-welcome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .featured-card {
+    padding: 1.25rem;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-grid {
+    grid-template-columns: 1fr;
   }
 }
