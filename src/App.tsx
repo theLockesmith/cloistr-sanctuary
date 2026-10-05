@@ -17,11 +17,8 @@ interface Service {
 
 const PRODUCTION_URLS: Record<string, string> = {
   space:      'https://space.cloistr.xyz',
-  docs:       'https://docs.cloistr.xyz',
-  sheets:     'https://sheets.cloistr.xyz',
-  slides:     'https://slides.cloistr.xyz',
-  whiteboard: 'https://whiteboard.cloistr.xyz',
   tasks:      'https://tasks.cloistr.xyz',
+  pages:      'https://pages.cloistr.xyz',
   stash:      'https://stash.cloistr.xyz',
   email:      'https://email.cloistr.xyz',
   vault:      'https://vault.cloistr.xyz',
@@ -45,11 +42,8 @@ const FEATURED: Service = {
 }
 
 const WORKSPACE_SERVICES: Service[] = [
-  { id: 'docs',       name: 'Docs',       description: 'Collaborative documents',   url: svcUrl('docs'),       icon: '📝' },
-  { id: 'sheets',     name: 'Sheets',     description: 'Spreadsheets',             url: svcUrl('sheets'),     icon: '📊' },
-  { id: 'slides',     name: 'Slides',     description: 'Presentations',            url: svcUrl('slides'),     icon: '📽️' },
-  { id: 'whiteboard', name: 'Whiteboard', description: 'Infinite canvas',          url: svcUrl('whiteboard'), icon: '🎨' },
   { id: 'tasks',      name: 'Tasks',      description: 'Task management',          url: svcUrl('tasks'),      icon: '✅' },
+  { id: 'pages',      name: 'Pages',      description: 'Websites and blogs',       url: svcUrl('pages'),      icon: '🌐' },
   { id: 'stash',      name: 'Stash',      description: 'Encrypted file storage',   url: svcUrl('stash'),      icon: '📁' },
   { id: 'email',      name: 'Email',      description: 'Your @cloistr.xyz email',  url: svcUrl('email'),      icon: '✉️' },
   { id: 'vault',      name: 'Vault',      description: 'Secrets and credentials',  url: svcUrl('vault'),      icon: '🔒' },
@@ -60,10 +54,7 @@ const LANDING_SERVICES: Service[] = [
   { id: 'me',         name: 'Identity',   description: 'Your @cloistr.xyz address—NIP-05 verification, Lightning payments, and the key to everything else.', url: svcUrl('me'),         icon: '🔑' },
   { id: 'space',      name: 'Space',      description: 'Your Nostr home. Follow people, join communities, and never miss a note from the people who matter.',  url: svcUrl('space'),      icon: '💬' },
   { id: 'stash',      name: 'Stash',      description: 'Encrypted file storage powered by Blossom. Upload, organize, and share—your files, your rules.',       url: svcUrl('stash'),      icon: '📁' },
-  { id: 'docs',       name: 'Docs',       description: 'Collaborative documents with real-time editing. Think Google Docs, but you own it.',                  url: svcUrl('docs'),       icon: '📝' },
-  { id: 'sheets',     name: 'Sheets',     description: 'Spreadsheets that sync across devices. Formulas, charts, and collaboration—all encrypted.',            url: svcUrl('sheets'),     icon: '📊' },
-  { id: 'whiteboard', name: 'Whiteboard', description: 'Infinite canvas for diagrams, sketches, and visual thinking. Collaborate in real time.',               url: svcUrl('whiteboard'), icon: '🎨' },
-  { id: 'slides',     name: 'Slides',     description: 'Build presentations that travel with you. Present from any device, share via Nostr.',                  url: svcUrl('slides'),     icon: '📽️' },
+  { id: 'pages',      name: 'Pages',      description: 'Build and publish websites and blogs. Your content, your domain, powered by Nostr.',                    url: svcUrl('pages'),      icon: '🌐' },
   { id: 'relay',      name: 'Relay',      description: 'Your personal Nostr relay with inbox/outbox support. Control who can reach you.',                      url: svcUrl('relay'),      icon: '📡' },
   { id: 'discover',   name: 'Discovery',  description: 'Find the right relays for you. Compare speed, uptime, and policies across hundreds of relays.',         url: svcUrl('discover'),   icon: '🔍' },
 ]
