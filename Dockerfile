@@ -24,8 +24,31 @@ FROM nginxinc/nginx-unprivileged:alpine
 # Copy built assets
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy config template — the base image's entrypoint runs envsubst on files
+# in /etc/nginx/templates/ before starting nginx
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+# Production values as defaults: an unmodified deployment behaves identically
+# to before this change. Staging overrides these at container start.
+ENV CLOISTR_RELAY_URL=wss://relay.cloistr.xyz \
+    CLOISTR_SIGNER_URL=https://signer.cloistr.xyz \
+    CLOISTR_BLOSSOM_URL=https://nostr.download \
+    CLOISTR_DISCOVERY_URL=https://discover.cloistr.xyz \
+    CLOISTR_APP_URL=https://cloistr.xyz \
+    CLOISTR_ENVIRONMENT=production \
+    CLOISTR_SVC_SPACE=https://space.cloistr.xyz \
+    CLOISTR_SVC_DOCS=https://docs.cloistr.xyz \
+    CLOISTR_SVC_SHEETS=https://sheets.cloistr.xyz \
+    CLOISTR_SVC_SLIDES=https://slides.cloistr.xyz \
+    CLOISTR_SVC_WHITEBOARD=https://whiteboard.cloistr.xyz \
+    CLOISTR_SVC_TASKS=https://tasks.cloistr.xyz \
+    CLOISTR_SVC_STASH=https://stash.cloistr.xyz \
+    CLOISTR_SVC_EMAIL=https://email.cloistr.xyz \
+    CLOISTR_SVC_VAULT=https://vault.cloistr.xyz \
+    CLOISTR_SVC_ME=https://me.cloistr.xyz \
+    CLOISTR_SVC_RELAY=https://relay.cloistr.xyz \
+    CLOISTR_SVC_DISCOVER=https://discover.cloistr.xyz \
+    NGINX_ENVSUBST_FILTER=^CLOISTR_
 
 EXPOSE 8080
 

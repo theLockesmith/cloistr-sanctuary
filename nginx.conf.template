@@ -9,6 +9,14 @@ server {
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript;
     gzip_min_length 1000;
 
+    # Runtime configuration — exact match outranks the regex below
+    location = /config.js {
+        access_log off;
+        default_type application/javascript;
+        add_header Cache-Control "no-store" always;
+        return 200 'window.__CLOISTR_CONFIG__={"relayUrl":"${CLOISTR_RELAY_URL}","blossomUrl":"${CLOISTR_BLOSSOM_URL}","discoveryUrl":"${CLOISTR_DISCOVERY_URL}","signerUrl":"${CLOISTR_SIGNER_URL}","appUrl":"${CLOISTR_APP_URL}","environment":"${CLOISTR_ENVIRONMENT}","services":{"space":"${CLOISTR_SVC_SPACE}","docs":"${CLOISTR_SVC_DOCS}","sheets":"${CLOISTR_SVC_SHEETS}","slides":"${CLOISTR_SVC_SLIDES}","whiteboard":"${CLOISTR_SVC_WHITEBOARD}","tasks":"${CLOISTR_SVC_TASKS}","stash":"${CLOISTR_SVC_STASH}","email":"${CLOISTR_SVC_EMAIL}","vault":"${CLOISTR_SVC_VAULT}","me":"${CLOISTR_SVC_ME}","relay":"${CLOISTR_SVC_RELAY}","discover":"${CLOISTR_SVC_DISCOVER}"}};';
+    }
+
     # Cache static assets with content hashes
     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
         expires 1y;
