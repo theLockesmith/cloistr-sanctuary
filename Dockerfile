@@ -32,7 +32,7 @@ COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 # to before this change. Staging overrides these at container start.
 ENV CLOISTR_RELAY_URL=wss://relay.cloistr.xyz \
     CLOISTR_SIGNER_URL=https://signer.cloistr.xyz \
-    CLOISTR_BLOSSOM_URL=https://nostr.download \
+    CLOISTR_BLOSSOM_URL=https://files.cloistr.xyz \
     CLOISTR_DISCOVERY_URL=https://discover.cloistr.xyz \
     CLOISTR_APP_URL=https://cloistr.xyz \
     CLOISTR_ENVIRONMENT=production \
