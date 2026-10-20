@@ -20,7 +20,7 @@ a {
 }
 
 a:hover {
-  color: var(--cloistr-primary);
+  color: var(--cloistr-primary-text);
 }
 
 .sanctuary {
