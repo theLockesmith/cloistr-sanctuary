@@ -166,7 +166,9 @@ a:hover {
 .feature h3 {
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
-  color: var(--cloistr-primary-light);
+  /* primary-text, not primary-light: light purple on white is 2.7:1, below
+     the 3:1 WCAG AA floor for these headings (WV4, SANCTUARY-4). */
+  color: var(--cloistr-primary-text);
 }
 
 .feature p {
