@@ -30,7 +30,7 @@ const PRODUCTION_URLS: Record<string, string> = {
 const config = getServiceConfig()
 
 function svcUrl(id: string): string {
-  return config.services[id] || PRODUCTION_URLS[id] || `https://${id}.cloistr.xyz`
+  return config.services[id] || PRODUCTION_URLS[id]
 }
 
 const FEATURED: Service = {
@@ -185,12 +185,48 @@ function MarketingPage() {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
+// Not found — any path other than the root. nginx serves the app for every
+// path with a 200; a real 404 status would trip the WV4 harness, which counts
+// every 4xx response as broken.
+// ──────────────────────────────────────────────────────────────────────────────
+
+function isHomePath(pathname: string): boolean {
+  return pathname === '/' || pathname === '/index.html'
+}
+
+function NotFoundPage() {
+  return (
+    <div className="sanctuary">
+      <Header logoHref="/" activeServiceId="home" />
+
+      <main className="main">
+        <section className="not-found">
+          <h1 className="not-found-title">Page not found</h1>
+          <p className="not-found-text">
+            There is nothing at this address. It may have moved, or the link may be mistyped.
+          </p>
+          <a href="/" className="cta-button">
+            Back to Cloistr
+          </a>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  )
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
 // AppContent — auth-aware routing; must live inside SharedAuthProvider
 // ──────────────────────────────────────────────────────────────────────────────
 
 function AppContent() {
   const { authState } = useNostrAuth()
   const { isResolving } = useSharedSession()
+
+  if (!isHomePath(window.location.pathname)) {
+    return <NotFoundPage />
+  }
 
   // Hold until the SSO session restore settles — prevents the marketing page
   // flashing before a returning user's session loads.

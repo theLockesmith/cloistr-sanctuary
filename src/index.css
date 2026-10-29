@@ -179,6 +179,25 @@ a:hover {
    Loading state
    ────────────────────────────────────────────────────────────────────────── */
 
+/* Not found */
+.not-found {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.not-found-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.not-found-text {
+  font-size: 1.1rem;
+  color: var(--cloistr-text-muted);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
 .sanctuary--loading {
   align-items: center;
   justify-content: center;
