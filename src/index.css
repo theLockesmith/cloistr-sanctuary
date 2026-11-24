@@ -136,15 +136,18 @@ a:hover {
   box-shadow: none;
 }
 
+/* On a phone the Copy button drops below rather than squeezing the address
+   into a mid-word wrap. */
 .relay-address {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
 }
 
 .relay-address code {
-  flex: 1;
+  flex: 1 1 14rem;
   min-width: 0;
   overflow-wrap: anywhere;
   font-size: 0.85rem;
