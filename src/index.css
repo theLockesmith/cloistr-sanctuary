@@ -129,6 +129,47 @@ a:hover {
   color: var(--cloistr-text-muted);
 }
 
+/* The Relay card is not a link, so it doesn't lift on hover */
+.service-card--static:hover {
+  border-color: var(--cloistr-border);
+  transform: none;
+  box-shadow: none;
+}
+
+.relay-address {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.relay-address code {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--cloistr-radius-sm, 6px);
+  background: var(--cloistr-bg);
+  border: 1px solid var(--cloistr-border);
+  color: var(--cloistr-text);
+}
+
+.relay-copy {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--cloistr-primary);
+  border-radius: var(--cloistr-radius-sm, 6px);
+  background: transparent;
+  color: var(--cloistr-primary-text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.relay-copy:hover {
+  background: var(--cloistr-primary);
+  color: white;
+}
+
 /* CTA Section */
 .cta-section {
   text-align: center;

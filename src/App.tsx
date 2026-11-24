@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useNostrAuth } from '@cloistr/auth'
-import { SharedAuthProvider, Header, Footer, ToastProvider, ThemeProvider, useSharedSession, Spinner } from '@cloistr/ui/components'
+import { SharedAuthProvider, Header, Footer, ToastProvider, ThemeProvider, useSharedSession, useToast, Spinner } from '@cloistr/ui/components'
 import '@cloistr/ui/styles'
 import { getServiceConfig } from '@cloistr/collab-common/config'
 
@@ -27,7 +28,11 @@ const PRODUCTION_URLS: Record<string, string> = {
   discover:   'https://discover.cloistr.xyz',
 }
 
+// The relay speaks websocket only; its https address has no web page.
+const PRODUCTION_RELAY = 'wss://relay.cloistr.xyz'
+
 const config = getServiceConfig()
+const relayAddress = config.relayUrl || PRODUCTION_RELAY
 
 function svcUrl(id: string): string {
   return config.services[id] || PRODUCTION_URLS[id]
@@ -66,6 +71,39 @@ const LANDING_SERVICES: Service[] = [
 function shortPubkey(pubkey: string): string {
   if (!pubkey || pubkey.length < 16) return pubkey
   return `${pubkey.slice(0, 8)}…${pubkey.slice(-8)}`
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Relay card — shows the wss:// address to copy instead of linking to it
+// ──────────────────────────────────────────────────────────────────────────────
+
+function RelayCard({ service }: { service: Service }) {
+  const { error } = useToast()
+  const [copied, setCopied] = useState(false)
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(relayAddress)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      error('Could not copy. Select the address and copy it instead.')
+    }
+  }
+
+  return (
+    <div className="service-card service-card--static">
+      <span className="service-icon">{service.icon}</span>
+      <h3 className="service-name">{service.name}</h3>
+      <p className="service-description">{service.description}</p>
+      <div className="relay-address">
+        <code>{relayAddress}</code>
+        <button type="button" className="relay-copy" aria-label="Copy relay address" onClick={copy}>
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+      </div>
+    </div>
+  )
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -143,7 +181,9 @@ function MarketingPage() {
         <section className="services">
           <h2 className="services-title">Everything You Need</h2>
           <div className="services-grid">
-            {LANDING_SERVICES.map((service) => (
+            {LANDING_SERVICES.map((service) => service.id === 'relay' ? (
+              <RelayCard key={service.id} service={service} />
+            ) : (
               <a key={service.id} href={service.url} className="service-card">
                 <span className="service-icon">{service.icon}</span>
                 <h3 className="service-name">{service.name}</h3>
